@@ -1,0 +1,37 @@
+targets:
+  $default:
+    sources:
+      - lib/**
+      - graphql/**
+      - schema.graphql
+    builders:
+      artemis:
+        options:
+          scalar_mapping:
+            - graphql_type: CustomDateTime
+              dart_type: DateTime
+            - graphql_type: DateTime
+              dart_type: DateTime
+            - graphql_type: CustomTime
+              dart_type: String
+            - graphql_type: Date
+              dart_type: DateTime
+            - graphql_type: CustomDate
+              dart_type: DateTime
+            - graphql_type: GenericScalar
+              dart_type: Object
+            - graphql_type: BigInt
+              dart_type: int
+            - graphql_type: ID
+              dart_type: int
+            - graphql_type: JSONString
+              dart_type: Object
+            - graphql_type: Upload
+              dart_type: Object
+            - graphql_type: Decimal
+              dart_type: double
+          schema_mapping:
+            - schema: schema.graphql
+              queries_glob: graphql/*.graphql
+              output: lib/models/api.dart
+              naming_scheme: pathedWithFields

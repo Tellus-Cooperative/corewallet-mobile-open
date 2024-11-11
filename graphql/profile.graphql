@@ -1,0 +1,106 @@
+query Profiles($limit: Int, $offset: Int, $search: String, $username: String){
+    profiles(search: $search, ordering: "-id", user__username: $username){
+        totalCount
+        results(limit: $limit, offset: $offset){
+            id
+            country
+            mobile_phone
+            mobile_phone_code
+            exist_wallets
+            is_verified_email
+            is_card_reserved
+            id_type
+            id_number
+            user {
+                id
+                username
+                first_name
+                last_name
+                email
+            }
+            main_wallet {
+                id
+            }
+        }
+    }
+}
+
+query Profile($id: ID!){
+    profile(id:$id){
+        id
+        country
+        mobile_phone
+        mobile_phone_code
+        is_card_reserved
+        id_type
+        id_number
+        user {
+            id
+            username
+            first_name
+            last_name
+            email
+        }
+    }
+}
+
+mutation createProfile($full_name: String!, $mobile_phone: String, $mobile_phone_code: String,
+    $country: String, $username: String!, $password: String!, $email: String!, $id_type: String, $id_number: String){
+    create_profile(full_name: $full_name, mobile_phone: $mobile_phone, mobile_phone_code: $mobile_phone_code,
+        username:$username, password: $password, email: $email, country: $country, id_type: $id_type, id_number: $id_number) {
+        profile {
+            id
+        }
+    }
+}
+
+mutation updateProfile($id: Int!,  $full_name: String, $mobile_phone:String, $mobile_phone_code:String,
+    $country: String, $pin: String, $username: String, $password: String, $code_onesignal: String,
+    $email: String, $is_card_reserved: Boolean, $id_type: String, $id_number: String){
+    update_profile(id: $id, full_name: $full_name, mobile_phone: $mobile_phone, mobile_phone_code: $mobile_phone_code,
+        country: $country, pin: $pin, username: $username, password: $password, code_onesignal: $code_onesignal,
+        email: $email, is_card_reserved: $is_card_reserved, id_type: $id_type, id_number: $id_number) {
+        profile {
+            id
+        }
+    }
+}
+
+mutation verifyProfilePin($id: Int!, $pin: String!) {
+    verify_profile_pin(id: $id, pin: $pin) {
+        status
+    }
+}
+
+mutation getProfile($token: String!){
+    get_profile(token: $token) {
+        profile{
+            id
+            mobile_phone
+            is_card_reserved
+            id_type
+            id_number
+        }
+        token
+        message
+        is_for_create
+    }
+}
+
+mutation ResetPasswordUser($email: String!){
+    reset_password_user(email: $email){
+        status
+    }
+}
+
+mutation SendEmailPin($id: Int!){
+    send_email_pin(id: $id){
+        status
+    }
+}
+
+mutation VerifyEmailPin($id: Int!, $pin: String!){
+    verify_email_pin(id: $id, pin: $pin){
+        status
+    }
+}

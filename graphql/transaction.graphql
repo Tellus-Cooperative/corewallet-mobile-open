@@ -1,0 +1,37 @@
+mutation createTransaction($wallet_id: Int!, $seed_encrypted_key: String!, $destination_id: String!, $amount: String!, $memo: String) {
+    create_transaction(wallet_id: $wallet_id, seed_encrypted_key: $seed_encrypted_key, destination_id: $destination_id, amount: $amount, memo: $memo) {
+        status
+    }
+}
+
+query Conversions($limit: Int, $offset: Int, $search: String, $force_update: String ){
+    conversions(search: $search, ordering: "id", force_update: $force_update){
+        totalCount
+        results(limit: $limit, offset: $offset){
+            id
+            name
+            symbol
+            quote_name
+            quote_symbol
+            quote_price
+            updated_at
+        }
+    }
+}
+
+mutation createSwapToken($wallet_id: Int!, $seed_encrypted_key: String!, $origin_asset_id: Int!, $destiny_asset_id: Int!, $amount: String!) {
+    create_swap_token(wallet_id: $wallet_id, seed_encrypted_key: $seed_encrypted_key, origin_asset_id: $origin_asset_id, destiny_asset_id: $destiny_asset_id, amount: $amount) {
+        status
+    }
+}
+
+mutation buildPathStrictSend($wallet_id: Int!, $origin_asset_id: Int!, $destiny_asset_id: Int!, $amount: String!) {
+    build_path_strict_send(
+        wallet_id: $wallet_id
+        origin_asset_id: $origin_asset_id
+        destiny_asset_id: $destiny_asset_id
+        amount: $amount
+    ) {
+        amount
+    }
+}

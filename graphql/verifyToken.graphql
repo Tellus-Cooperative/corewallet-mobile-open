@@ -1,0 +1,5 @@
+mutation VerifyToken($token: String!){
+    verify_token(token: $token) {
+        payload
+    }
+}

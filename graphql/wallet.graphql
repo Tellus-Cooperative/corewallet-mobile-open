@@ -1,0 +1,109 @@
+query Wallets($limit: Int, $offset: Int, $search: String,  $profile_id: Decimal){
+    wallets(search: $search, profile_id: $profile_id, ordering: "id"){
+        totalCount
+        results(limit: $limit, offset: $offset){
+            id
+            public_key
+            name
+            emoji
+            balance
+        }
+    }
+}
+
+query WalletsShort($limit: Int, $offset: Int, $search: String,  $profile_id: Decimal){
+    wallets(search: $search, profile_id: $profile_id, ordering: "id"){
+        totalCount
+        results(limit: $limit, offset: $offset){
+            id
+            public_key
+            name
+            emoji
+        }
+    }
+}
+
+query Wallet($id: ID!) {
+    wallet(id: $id) {
+        id
+        public_key
+        name
+        emoji
+        balance
+        assets {
+            id
+            asset_type
+            balance
+            asset {
+                id
+                symbol
+                image
+            }
+        }
+    }
+}
+
+mutation CreateMnemonicWallet($profile_id: Int!){
+    create_mnemonic_wallet(profile_id: $profile_id){
+        mnemonic_phrase
+    }
+}
+
+mutation CreateWallet($profile_id: Int!, $mnemonic_phrase: String!) {
+    create_wallet(profile_id: $profile_id, mnemonic_phrase: $mnemonic_phrase){
+        wallet {
+            id
+            public_key
+        }
+        secret_seed
+        secret_seed_encrypted
+    }
+}
+
+mutation UpdateWallet($id: Int!, $name: String, $emoji: String){
+    update_wallet(id: $id, name: $name, emoji: $emoji){
+        wallet {
+            id
+        }
+    }
+}
+
+mutation ImportWallet($profile_id: Int!, $secret_key: String!) {
+    import_wallet(profile_id: $profile_id, secret_key: $secret_key){
+        wallet {
+            id
+            public_key
+        }
+        secret_seed_encrypted
+    }
+}
+
+mutation ExportWallet($id: Int!, $seed_encrypted_key: String!, $phrases: String!){
+    export_wallet(id: $id, seed_encrypted_key: $seed_encrypted_key, phrases: $phrases){
+        wallet {
+            id
+        }
+        secret_seed
+    }
+}
+
+mutation deleteWallet($wallet_id: Int!, $seed_encrypted_key: String!, $destination_wallet_id: Int) {
+    delete_wallet(
+        wallet_id: $wallet_id
+        seed_encrypted_key: $seed_encrypted_key
+        destination_wallet_id: $destination_wallet_id
+    ) {
+        status
+    }
+}
+
+
+mutation createWalletAsset($id: Int!, $seed_encrypted_key: String!, $asset_id: Int!) {
+    create_wallet_asset(
+        id: $id
+        seed_encrypted_key: $seed_encrypted_key
+        asset_id: $asset_id
+    ) {
+        status
+    }
+}

@@ -1,0 +1,1131 @@
+# This file was generated. Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+directive @base64(
+    "Action to perform: \"encode\" or \"decode\""
+    op: String
+) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"""
+
+CamelCase result.
+"""
+directive @camel_case on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"""
+
+Return a copy of the string with its first character capitalized and the rest lowercased.
+"""
+directive @capitalize on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"""
+
+Ceils value. Supports both String and Float fields.
+"""
+directive @ceil on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"""
+
+Return centered in a string of length width. Padding is done using the specified fillchar
+The original string is returned if width is less than or equal to len(s).
+"""
+directive @center(
+    "Value to fill the returned str"
+    fillchar: String,
+    "Value to returned str lenght"
+    width: Int!
+) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+directive @currency(
+    "Currency symbol (default: $)"
+    symbol: String
+) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"""
+
+Format the date from resolving the field by dateutil module.
+"""
+directive @date(
+    "A format given by dateutil module"
+    format: String
+) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"""
+
+Default to given value if None or ""
+"""
+directive @default(
+    "Value to default to"
+    to: String!
+) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"""
+
+Floors value. Supports both String and Float fields.
+"""
+directive @floor on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"""
+
+KebabCase result.
+"""
+directive @kebab_case on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"""
+
+Lowercases result.
+"""
+directive @lowercase on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"""
+
+String formatting like a specify Python number formatting
+"""
+directive @number(
+    "Value to default to"
+    as: String!
+) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"""
+
+Return a copy of the string with all occurrences of substring old replaced by new.
+If the optional argument count is given, only the first count occurrences are replaced.
+"""
+directive @replace(
+    "Value to returned str lenght"
+    count: Int,
+    "Value of new character to replace"
+    new: String!,
+    "Value of old character to replace"
+    old: String!
+) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+directive @sample(
+    "Value to default to"
+    k: Int!
+) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"""
+
+Shuffle the list in place
+"""
+directive @shuffle on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"""
+
+SnakeCase result.
+"""
+directive @snake_case on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"""
+
+Return a copy of the string with the leading and trailing characters removed.
+The chars argument is a string specifying the set of characters to be removed.
+If omitted or None, the chars argument defaults to removing whitespace.
+The chars argument is not a prefix or suffix; rather, all combinations of its values are stripped.
+"""
+directive @strip(
+    "Value to specify the set of characters to be removed"
+    chars: String
+) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"""
+
+Return a copy of the string with uppercase characters converted to lowercase and vice versa.
+"""
+directive @swap_case on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"""
+
+Return a titlecased version of the string where words start with an
+uppercase character and the remaining characters are lowercase.
+"""
+directive @title_case on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"""
+
+Uppercases result.
+"""
+directive @uppercase on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+type AssetListType {
+    "Asset list, paginated by LimitOffsetPaginator"
+    results(
+        "Number of results to return per page. Default 'default_limit': 25, and 'max_limit': 100"
+        limit: Int = 25,
+        "The initial index from which to return the results. Default: 0"
+        offset: Int,
+        "A string or comma delimited string values that indicate the default ordering when obtaining lists of objects."
+        ordering: String
+    ): [AssetType]
+    "Total count of matches elements"
+    totalCount: Int
+}
+
+type AssetType {
+    id: Int
+    "URl de ícono"
+    image: String
+    is_recommended: Boolean
+    is_testnet: Boolean
+    "Nombre"
+    name: String
+    "Posición"
+    position: Int
+    "Precio 24h"
+    price24h: String
+    "Precio Porcentaje 24h"
+    price_percent24h: String
+    "Fecha de Registro"
+    register_at: CustomDateTime
+    "Símbolo"
+    symbol: String
+    "Fecha de Actualización"
+    updated_at: CustomDateTime
+    wallet_assets: [WalletType!]
+    walletasset: [WalletAssetType!]
+}
+
+type BankListType {
+    "Bank list, paginated by LimitOffsetPaginator"
+    results(
+        "Number of results to return per page. Default 'default_limit': 25, and 'max_limit': 100"
+        limit: Int = 25,
+        "The initial index from which to return the results. Default: 0"
+        offset: Int,
+        "A string or comma delimited string values that indicate the default ordering when obtaining lists of objects."
+        ordering: String
+    ): [BankType]
+    "Total count of matches elements"
+    totalCount: Int
+}
+
+type BankType {
+    "Código de Banco"
+    code: String
+    "País"
+    country: BankCountryEnum
+    id: Int
+    is_active: Boolean
+    is_active_deposit: Boolean
+    is_active_withdrawal: Boolean
+    "Nombre"
+    name: String
+    profilebank: [ProfileBankType!]
+    "Fecha de Registro"
+    register_at: CustomDateTime
+    "Tipo de cuenta"
+    type: String
+    "Fecha de Actualización"
+    updated_at: CustomDateTime
+}
+
+type BuildPathStrictSend {
+    amount: String
+}
+
+type ConversionListType {
+    "Conversion list, paginated by LimitOffsetPaginator"
+    results(
+        "Number of results to return per page. Default 'default_limit': 25, and 'max_limit': 100"
+        limit: Int = 25,
+        "The initial index from which to return the results. Default: 0"
+        offset: Int,
+        "A string or comma delimited string values that indicate the default ordering when obtaining lists of objects."
+        ordering: String
+    ): [ConversionType]
+    "Total count of matches elements"
+    totalCount: Int
+}
+
+type ConversionType {
+    id: Int
+    "Nombre"
+    name: String
+    "Nombre de Conversión"
+    quote_name: String
+    "Precio de Conversión"
+    quote_price: Float
+    "Simbolo de Conversión"
+    quote_symbol: String
+    "Fecha de Registro"
+    register_at: CustomDateTime
+    "Símbolo"
+    symbol: String
+    "Fecha de Actualización"
+    updated_at: CustomDateTime
+}
+
+type CreateAssetWallet {
+    status: Boolean
+}
+
+type CreateDeposit {
+    response: JSONString
+    status: Boolean
+}
+
+type CreateMnemonicWallet {
+    mnemonic_phrase: String
+}
+
+type CreateProfile {
+    profile: ProfileType
+}
+
+type CreateProfileBank {
+    account: ProfileBankType
+}
+
+type CreateSwapTokens {
+    status: Boolean
+}
+
+type CreateTransaction {
+    status: Boolean
+}
+
+type CreateWallet {
+    mnemonic_phrase: String
+    secret_seed: String
+    secret_seed_encrypted: String
+    wallet: WalletType
+}
+
+type CreateWidthdraw {
+    response: JSONString
+    status: Boolean
+}
+
+type DeleteProfileBank {
+    status: Boolean
+}
+
+type DeleteWallet {
+    status: Boolean
+}
+
+type ExportWallet {
+    secret_seed: String
+    wallet: WalletType
+}
+
+type GetProfile {
+    is_for_create: Boolean
+    message: String
+    profile: ProfileType
+    token: String
+}
+
+type ImportWallet {
+    secret_seed_encrypted: String
+    wallet: WalletType
+}
+
+type Mutation {
+    build_path_strict_send(amount: String!, destiny_asset_id: Int!, origin_asset_id: Int!, wallet_id: Int!): BuildPathStrictSend
+    create_bank_account(account_number: String!, alias: String, bank_id: Int!, profile_id: Int!): CreateProfileBank
+    create_deposit(amount: String!, seed_encrypted_key: String, wallet_id: Int!): CreateDeposit
+    create_mnemonic_wallet(profile_id: Int!): CreateMnemonicWallet
+    create_profile(code_onesignal: String, country: String, email: String!, full_name: String!, id_number: String, id_type: String, mobile_phone: String, mobile_phone_code: String, password: String!, username: String!): CreateProfile
+    create_swap_token(amount: String!, destiny_asset_id: Int!, origin_asset_id: Int!, seed_encrypted_key: String!, wallet_id: Int!): CreateSwapTokens
+    create_transaction(amount: String!, destination_id: String!, memo: String, seed_encrypted_key: String!, wallet_id: Int!): CreateTransaction
+    create_wallet(mnemonic_phrase: String!, profile_id: Int!): CreateWallet
+    create_wallet_asset(asset_id: Int!, id: Int!, seed_encrypted_key: String!): CreateAssetWallet
+    create_withdraw(amount: String!, bank_account_id: Int!, seed_encrypted_key: String, wallet_id: Int!): CreateWidthdraw
+    delete_bank_account(id: Int!): DeleteProfileBank
+    delete_wallet(destination_wallet_id: Int, seed_encrypted_key: String!, wallet_id: Int!): DeleteWallet
+    export_wallet(id: Int!, phrases: String!, seed_encrypted_key: String!): ExportWallet
+    get_profile(token: String!): GetProfile
+    import_wallet(profile_id: Int!, secret_key: String!): ImportWallet
+    refresh_token(token: String): Refresh
+    reset_password_user(email: String!): ResetPasswordUser
+    send_email_pin(id: Int!): SendEmailPin
+    "Obtain JSON Web Token mutation"
+    token_auth(password: String!, username: String!): ObtainJSONWebToken
+    update_bank_account(account_number: String, alias: String, id: Int!): UpdateProfileBank
+    update_profile(code_onesignal: String, country: String, email: String, full_name: String, id: Int!, id_number: String, id_type: String, is_card_reserved: Boolean, mobile_phone: String, mobile_phone_code: String, password: String, pin: String, username: String): UpdateProfile
+    update_user(id: Int!, password: String): UpdateUser
+    update_wallet(emoji: String, id: Int!, name: String): UpdateWallet
+    verify_customer(email: String!, first_name: String!, last_name: String!, seed_encrypted_key: String, wallet_id: Int!): VerifyCustomer
+    verify_email_pin(id: Int!, pin: String!): VerifyEmailPin
+    verify_profile_pin(id: Int!, pin: String!): VerifyProfilePin
+    verify_token(token: String): Verify
+}
+
+"Obtain JSON Web Token mutation"
+type ObtainJSONWebToken {
+    payload: GenericScalar!
+    refresh_expires_in: Int!
+    token: String!
+}
+
+type ProfileBankListType {
+    "ProfileBank list, paginated by LimitOffsetPaginator"
+    results(
+        "Number of results to return per page. Default 'default_limit': 25, and 'max_limit': 100"
+        limit: Int = 25,
+        "The initial index from which to return the results. Default: 0"
+        offset: Int,
+        "A string or comma delimited string values that indicate the default ordering when obtaining lists of objects."
+        ordering: String
+    ): [ProfileBankType]
+    "Total count of matches elements"
+    totalCount: Int
+}
+
+type ProfileBankType {
+    "Nombre"
+    account_number: String
+    "Alias"
+    alias: String
+    "Banco"
+    bank: BankType
+    id: Int
+    "Perfil"
+    profile: ProfileType
+    "Fecha de Registro"
+    register_at: CustomDateTime
+    "Fecha de Actualización"
+    updated_at: CustomDateTime
+}
+
+type ProfileListType {
+    "Profile list, paginated by LimitOffsetPaginator"
+    results(
+        "Number of results to return per page. Default 'default_limit': 25, and 'max_limit': 100"
+        limit: Int = 25,
+        "The initial index from which to return the results. Default: 0"
+        offset: Int,
+        "A string or comma delimited string values that indicate the default ordering when obtaining lists of objects."
+        ordering: String
+    ): [ProfileType]
+    "Total count of matches elements"
+    totalCount: Int
+}
+
+type ProfileType {
+    "Código de Onesignal"
+    code_onesignal: String
+    country: String
+    "Codigo de Verficación de correo"
+    email_code_verify: String
+    "Fecha de Verificación de correo"
+    email_verified_at: CustomDateTime
+    exist_wallets: Boolean
+    id: Int
+    "Numero de identificación"
+    id_number: String
+    id_type: String
+    is_card_reserved: Boolean
+    is_verified_email: Boolean
+    main_wallet: WalletType
+    "Nro. de Teléfono"
+    mobile_phone: String
+    "Código de Teléfono"
+    mobile_phone_code: String
+    "Pin"
+    pin: String
+    profile_banks: [ProfileBankType!]
+    "Fecha de Registro"
+    register_at: CustomDateTime
+    "user"
+    user: UserType
+    wallet: [WalletType!]
+}
+
+type Query {
+    asset(
+        "Django object unique identification field"
+        id: ID!
+    ): AssetType
+    "Asset list"
+    assets(force_update: String, id: Int, is_recommended: Boolean, ordering: String, search: String): AssetListType
+    bank(
+        "Django object unique identification field"
+        id: ID!
+    ): BankType
+    "Bank list"
+    banks(id: Int, ordering: String, search: String): BankListType
+    conversion(
+        "Django object unique identification field"
+        id: ID!
+    ): ConversionType
+    "Conversion list"
+    conversions(force_update: String, id: Int, ordering: String, search: String): ConversionListType
+    profile(
+        "Django object unique identification field"
+        id: ID!
+    ): ProfileType
+    profile_bank(
+        "Django object unique identification field"
+        id: ID!
+    ): ProfileBankType
+    "ProfileBank list"
+    profile_banks(id: Int, ordering: String, profile_id: Decimal, search: String): ProfileBankListType
+    "Profile list"
+    profiles(id: Int, ordering: String, search: String, user__username: String): ProfileListType
+    wallet(
+        "Django object unique identification field"
+        id: ID!
+    ): WalletType
+    wallet_asset(
+        "Django object unique identification field"
+        id: ID!
+    ): WalletAssetType
+    "Wallet list"
+    wallets(id: Int, ordering: String, profile_id: Decimal, search: String): WalletListType
+}
+
+type Refresh {
+    payload: GenericScalar!
+    refresh_expires_in: Int!
+    token: String!
+}
+
+type ResetPasswordUser {
+    status: Boolean
+}
+
+type SendEmailPin {
+    status: Boolean
+}
+
+type UpdateProfile {
+    profile: ProfileType
+}
+
+type UpdateProfileBank {
+    account: ProfileBankType
+}
+
+type UpdateUser {
+    user: UserType
+}
+
+type UpdateWallet {
+    wallet: WalletType
+}
+
+type UserType {
+    "fecha de alta"
+    date_joined: CustomDateTime
+    "dirección de correo electrónico"
+    email: String
+    "nombre"
+    first_name: String
+    id: Int
+    "Indica si el usuario debe ser tratado como activo. Desmarque esta opción en lugar de borrar la cuenta."
+    is_active: Boolean
+    "Indica si el usuario puede entrar en este sitio de administración."
+    is_staff: Boolean
+    "Indica que este usuario tiene todos los permisos sin asignárselos explícitamente."
+    is_superuser: Boolean
+    "último inicio de sesión"
+    last_login: CustomDateTime
+    "apellidos"
+    last_name: String
+    "contraseña"
+    password: String
+    profile: ProfileType
+    "Requerido. 150 carácteres como máximo. Únicamente letras, dígitos y @/./+/-/_ "
+    username: String
+}
+
+type Verify {
+    payload: GenericScalar!
+}
+
+type VerifyCustomer {
+    customer_id: String
+    status: String
+}
+
+type VerifyEmailPin {
+    status: Boolean
+}
+
+type VerifyProfilePin {
+    status: Boolean
+}
+
+type WalletAssetType {
+    "Asset"
+    asset: AssetType
+    "Código de Asset"
+    asset_code: String
+    "Tipo de Asset"
+    asset_type: String
+    "Balance"
+    balance: String
+    "deleted at"
+    deleted_at: CustomDateTime
+    id: Int
+    is_authorized: Boolean
+    "Fecha de Actualización"
+    updated_at: CustomDateTime
+    "Wallet"
+    wallet: WalletType
+}
+
+type WalletListType {
+    "Wallet list, paginated by LimitOffsetPaginator"
+    results(
+        "Number of results to return per page. Default 'default_limit': 25, and 'max_limit': 100"
+        limit: Int = 25,
+        "The initial index from which to return the results. Default: 0"
+        offset: Int,
+        "A string or comma delimited string values that indicate the default ordering when obtaining lists of objects."
+        ordering: String
+    ): [WalletType]
+    "Total count of matches elements"
+    totalCount: Int
+}
+
+type WalletType {
+    assets: [WalletAssetType]
+    balance: String
+    "deleted at"
+    deleted_at: CustomDateTime
+    "Emoji"
+    emoji: String
+    id: Int
+    is_testnet: Boolean
+    "Nombre"
+    name: String
+    "profile"
+    profile: ProfileType
+    "Llave Pública"
+    public_key: String
+    "Fecha de Actualización"
+    updated_at: CustomDateTime
+    walletasset: [WalletAssetType!]
+}
+
+"An enumeration."
+enum BankCountryEnum {
+    "Principado de Andorra"
+    AD
+    "Emiratos Árabes Unidos"
+    AE
+    "Afganistán"
+    AF
+    "Antigua y Barbuda"
+    AG
+    "Anguila"
+    AI
+    "Albania"
+    AL
+    "Armenia"
+    AM
+    "Angola"
+    AO
+    "Antártida"
+    AQ
+    "Argentina"
+    AR
+    "Samoa Americana"
+    AS
+    "Austria"
+    AT
+    "Australia"
+    AU
+    "Aruba"
+    AW
+    "Islas de Åland"
+    AX
+    "Azerbaiyán"
+    AZ
+    "Bosnia y Herzegovina"
+    BA
+    "Barbados"
+    BB
+    "Bangladés"
+    BD
+    "Bélgica"
+    BE
+    "Burkina Faso"
+    BF
+    "Bulgaria"
+    BG
+    "Baréin"
+    BH
+    "Burundi"
+    BI
+    "Benín"
+    BJ
+    "San Bartolomé"
+    BL
+    "Bermudas"
+    BM
+    "Brunéi"
+    BN
+    "Bolivia"
+    BO
+    "Bonaire, San Eustaquio y Saba"
+    BQ
+    "Brasil"
+    BR
+    "Bahamas"
+    BS
+    "Bután"
+    BT
+    "Isla Bouvet"
+    BV
+    "Botsuana"
+    BW
+    "Bielorrusia"
+    BY
+    "Belice"
+    BZ
+    "Canadá"
+    CA
+    "Islas Cocos (Keeling)"
+    CC
+    "República Democrática del Congo"
+    CD
+    "República de África Central"
+    CF
+    "Congo"
+    CG
+    "Suiza"
+    CH
+    "Costa de Marfil"
+    CI
+    "Islas Cook"
+    CK
+    "Chile"
+    CL
+    "Camerún"
+    CM
+    "China"
+    CN
+    "Colombia"
+    CO
+    "Costa Rica"
+    CR
+    "Cuba"
+    CU
+    "Cabo Verde"
+    CV
+    "Curazao"
+    CW
+    "Isla de Navidad"
+    CX
+    "República de Chipre"
+    CY
+    "Chequia"
+    CZ
+    "Alemania"
+    DE
+    "República de Yibuti"
+    DJ
+    "Dinamarca"
+    DK
+    "Dominica"
+    DM
+    "República Dominicana"
+    DO
+    "Argelia"
+    DZ
+    "Ecuador"
+    EC
+    "Estonia"
+    EE
+    "Egipto"
+    EG
+    "Sahara Occidental"
+    EH
+    "Eritrea"
+    ER
+    "España"
+    ES
+    "Etiopía"
+    ET
+    "Finlandia"
+    FI
+    "Fiyi"
+    FJ
+    "Islas Malvinas"
+    FK
+    "Estados Federados de Micronesia"
+    FM
+    "Islas Feroe"
+    FO
+    "Francia"
+    FR
+    "Gabón"
+    GA
+    "Reino Unido"
+    GB
+    "Granada"
+    GD
+    "Georgia"
+    GE
+    "Guayana Francesa"
+    GF
+    "Guernsey"
+    GG
+    "Ghana"
+    GH
+    "Gibraltar"
+    GI
+    "Groenlandia"
+    GL
+    "Gambia"
+    GM
+    "Guinea"
+    GN
+    "Guadalupe"
+    GP
+    "Guinea Ecuatorial"
+    GQ
+    "Grecia"
+    GR
+    "Islas Georgias del Sur y Sandwich del Sur"
+    GS
+    "Guatemala"
+    GT
+    "Guam"
+    GU
+    "Guinea-Bisáu"
+    GW
+    "Guyana"
+    GY
+    "Hong Kong"
+    HK
+    "Islas Heard y McDonald"
+    HM
+    "Honduras"
+    HN
+    "Croacia"
+    HR
+    "Haití"
+    HT
+    "Hungría"
+    HU
+    "Indonesia"
+    ID
+    "Irlanda"
+    IE
+    "Israel"
+    IL
+    "Isla de Man"
+    IM
+    "India"
+    IN
+    "Territorio británico del océano Índico"
+    IO
+    "Irak"
+    IQ
+    "Irán"
+    IR
+    "Islandia"
+    IS
+    "Italia"
+    IT
+    "Jersey"
+    JE
+    "Jamaica"
+    JM
+    "Jordania"
+    JO
+    "Japón"
+    JP
+    "Kenia"
+    KE
+    "Kirguistán"
+    KG
+    "Camboya"
+    KH
+    "Kiribati"
+    KI
+    "Comoras"
+    KM
+    "San Cristóbal y Nieves"
+    KN
+    "Corea del Norte"
+    KP
+    "Corea del Sur"
+    KR
+    "Kuwait"
+    KW
+    "Islas Caimanes"
+    KY
+    "Kazajistán"
+    KZ
+    "Laos"
+    LA
+    "Líbano"
+    LB
+    "Santa Lucía"
+    LC
+    "Liechtenstein"
+    LI
+    "Sri Lanka"
+    LK
+    "Liberia"
+    LR
+    "Lesoto"
+    LS
+    "Lituania"
+    LT
+    "Luxemburgo"
+    LU
+    "Letonia"
+    LV
+    "Libia"
+    LY
+    "Marruecos"
+    MA
+    "Mónaco"
+    MC
+    "Moldavia"
+    MD
+    "Montenegro"
+    ME
+    "San Martín (Parte Francesa)"
+    MF
+    "Madagascar"
+    MG
+    "Islas Marshall"
+    MH
+    "Macedonia del Norte"
+    MK
+    "Malí"
+    ML
+    "Birmania"
+    MM
+    "Mongolia"
+    MN
+    "Macao"
+    MO
+    "Islas Marianas del Norte"
+    MP
+    "Martinica"
+    MQ
+    "Mauritania"
+    MR
+    "Montserrat"
+    MS
+    "Malta"
+    MT
+    "Mauricio"
+    MU
+    "Maldivas"
+    MV
+    "Malaui"
+    MW
+    "México"
+    MX
+    "Malasia"
+    MY
+    "Mozambique"
+    MZ
+    "Namibia"
+    NA
+    "Nueva Caledonia"
+    NC
+    "Níger"
+    NE
+    "Isla Norfolk"
+    NF
+    "Nigeria"
+    NG
+    "Nicaragua"
+    NI
+    "Países Bajos"
+    NL
+    "Noruega"
+    NO
+    "Nepal"
+    NP
+    "Nauru"
+    NR
+    "Niue"
+    NU
+    "Nueva Zelanda"
+    NZ
+    "Omán"
+    OM
+    "Panamá"
+    PA
+    "Perú"
+    PE
+    "Polinesia Francesa"
+    PF
+    "Papúa Nueva Guinea"
+    PG
+    "Filipinas"
+    PH
+    "Pakistán"
+    PK
+    "Polonia"
+    PL
+    "San Pedro y Miquelón"
+    PM
+    "Islas Pitcairn"
+    PN
+    "Puerto Rico"
+    PR
+    "Estado de Palestina"
+    PS
+    "Portugal"
+    PT
+    "Palaos"
+    PW
+    "Paraguay"
+    PY
+    "Catar"
+    QA
+    "Reunión"
+    RE
+    "Rumanía"
+    RO
+    "Serbia"
+    RS
+    "Rusia"
+    RU
+    "Ruanda"
+    RW
+    "Arabia Saudita"
+    SA
+    "Islas Salomón"
+    SB
+    "Seychelles"
+    SC
+    "Sudán"
+    SD
+    "Suecia"
+    SE
+    "Singapur"
+    SG
+    "Santa Elena, Ascensión y Tristán de Acuña"
+    SH
+    "Eslovenia"
+    SI
+    "Svalbard y Jan Mayen"
+    SJ
+    "Eslovaquia"
+    SK
+    "Sierra Leona"
+    SL
+    "San Marino"
+    SM
+    "Senegal"
+    SN
+    "Somalia"
+    SO
+    "Surinam"
+    SR
+    "Sudán del Sur"
+    SS
+    "Santo Tomé y Príncipe"
+    ST
+    "El Salvador"
+    SV
+    "San Martín (Parte Holandesa)"
+    SX
+    "Siria"
+    SY
+    "Suazilandia"
+    SZ
+    "Islas Turcas y Caicos"
+    TC
+    "República del Chad"
+    TD
+    "Tierras Australes y Antárticas Francesas"
+    TF
+    "Togo"
+    TG
+    "Tailandia"
+    TH
+    "Tayikistán"
+    TJ
+    "Tokelau"
+    TK
+    "Timor Oriental"
+    TL
+    "Turkmenistán"
+    TM
+    "Túnez"
+    TN
+    "Tonga"
+    TO
+    "Turquía"
+    TR
+    "Trinidad yTobago"
+    TT
+    "Tuvalu"
+    TV
+    "Taiwán"
+    TW
+    "Tanzania"
+    TZ
+    "Ucrania"
+    UA
+    "Uganda"
+    UG
+    "Islas Ultramarinas de Estados Unidos"
+    UM
+    "Estados Unidos"
+    US
+    "Uruguay"
+    UY
+    "Uzbekistán"
+    UZ
+    "Santa Sede"
+    VA
+    "San Vicente y las Granadinas"
+    VC
+    "Venezuela"
+    VE
+    "Islas Vírgenes Británicas"
+    VG
+    "Islas Vírgenes de los Estados Unidos"
+    VI
+    "Vietnam"
+    VN
+    "Vanuatu"
+    VU
+    "Wallis y Futuna"
+    WF
+    "Samoa"
+    WS
+    "Yemen"
+    YE
+    "Mayotte"
+    YT
+    "Sudáfrica"
+    ZA
+    "Zambia"
+    ZM
+    "Zimbabue"
+    ZW
+}
+
+scalar CustomDateTime
+
+"The `Decimal` scalar type represents a python Decimal."
+scalar Decimal
+
+"""
+
+The `GenericScalar` scalar type represents a generic
+GraphQL scalar value that could be:
+String, Boolean, Int, Float, List or Object.
+"""
+scalar GenericScalar
+
+"""
+
+Allows use of a JSON String for input / output from the GraphQL schema.
+
+Use of this type is *not recommended* as you lose the benefits of having a defined, static
+schema (one of the key benefits of GraphQL).
+"""
+scalar JSONString

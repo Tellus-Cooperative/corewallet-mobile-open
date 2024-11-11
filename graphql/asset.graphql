@@ -1,0 +1,14 @@
+query Assets($limit: Int, $offset: Int, $search: String,  $force_update: String, $is_recommended: Boolean){
+    assets(search: $search, force_update: $force_update, ordering: "position", is_recommended: $is_recommended){
+        totalCount
+        results(limit: $limit, offset: $offset){
+            id
+            name
+            symbol
+            position
+            price24h
+            price_percent24h
+            image
+        }
+    }
+}
